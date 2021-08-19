@@ -5,6 +5,7 @@ require('dotenv').config();
 const builders = require('@discordjs/builders');
 
 const Logger = require('./Logger');
+const Status = require("./Status");
 
 const fs = require('fs');
 
@@ -21,6 +22,8 @@ module.exports = class GClient extends Client {
         this.warning = new Logger('WARNING', 'yellow');
         this.commands = new Logger('COMMANDS', 'blue');
         this.events = new Logger('EVENTS', 'magenta');
+
+         this.bindLanguages();
 
         // Collection to store all commands
         this.executables = new Collection();
@@ -41,8 +44,23 @@ module.exports = class GClient extends Client {
             this.loadEvent('extensions/CommandHandler');
         });
 
-        // Register Language Packs
-        this.bind('ready', () => this.bindLanguages());
+        // Statuses
+        const status = new Status(this);
+        status.addStatus(async () => {
+            await this.guilds.fetch();
+
+            const results = await this.guilds.cache;
+            return `${results.size} guild${results.size === 1 ? '' : 's'}`
+        });
+        status.addStatus(async () => {
+            await this.guilds.fetch();
+
+            const results = await this.guilds.cache;
+            const users = results.reduce((acc, guild) => acc + guild.memberCount, 0);
+            return `${users} user${users === 1 ? '' : 's'}`;
+        });
+        status.addStatus(() => 'giveawaybot.club');
+        this.bind('ready', () => status.launch(5));
 
         // Launch MongoDB Application
         this.mongodb = new Logger('DB', 'brightGreen');
@@ -133,6 +151,18 @@ module.exports = class GClient extends Client {
          return null;
     }
 
+    createLanguageModel() {
+        const models = [];
+
+        for (const properties of this.languages.values()) {
+            models.push({
+                name: properties.emoji + ' ' + properties.name,
+                value: properties.name
+            });
+        }
+
+        return models;
+    }
 
     /**
      * Find a template if it doesn't exist it returns undefined.

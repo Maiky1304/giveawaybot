@@ -10,5 +10,5 @@ console.log(`${'\n' +
 console.log('*-----------------------------------------------------------------*\n')
 
 const client = new GClient({ intents: [ Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS,
-    Intents.FLAGS.GUILD_MESSAGES ] });
+    Intents.FLAGS.GUILD_MESSAGES ], shards: "auto" });
 client.login(process.env.TOKEN);

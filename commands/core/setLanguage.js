@@ -13,9 +13,11 @@ module.exports = class SetLanguageCommand extends Command {
                     type: 'SUB_COMMAND',
                     options: [
                         {
-                            name: 'country-code',
+                            name: 'country',
                             description: 'Provide a valid country code here that we support see all the languages using /language info',
-                            type: 'STRING'
+                            type: 'STRING',
+                            required: true,
+                            choices: client.createLanguageModel()
                         }
                     ]
                 },
