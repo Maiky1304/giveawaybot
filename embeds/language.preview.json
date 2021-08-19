@@ -1,0 +1,21 @@
+{
+  "title": "{emoji} Pack Information",
+  "color": "#2F3136",
+  "fields": [
+    {
+      "name": "Name",
+      "value": "{pack_name}",
+      "inline": true
+    },
+    {
+      "name": "Messages",
+      "value": "{pack_messages_amount} message{pack_messages_decide_s}",
+      "inline": true
+    },
+    {
+      "name": "Tags",
+      "value": "{pack_tags}",
+      "inline": true
+    }
+  ]
+}

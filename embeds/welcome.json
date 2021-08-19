@@ -1,0 +1,9 @@
+{
+  "title": "Thanks for inviting Giveaway Bot!",
+  "description": "\uD83C\uDDFA\uD83C\uDDF8 Please set the language using `/setlanguage` in any channel.\n \n\uD83D\uDE4B\u200D♂ If you have any questions please join the {invite}.",
+  "color": "#2F3136",
+  "fields": [{
+    "name": "Test",
+    "value": "{invite}"
+  }]
+}

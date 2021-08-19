@@ -1,0 +1,8 @@
+{
+  "name": "English",
+  "emoji": "\uD83C\uDDFA\uD83C\uDDF8",
+  "tags": ["en","engels","anglais"],
+  "pack": {
+    "hello-world": "Hello World!"
+  }
+}
